@@ -47,22 +47,22 @@ function reducer(state, { type, payload }) {
       }
     case ACTIONS.CLEAR:
       return {}
-    
+
     case ACTIONS.DELETA_DIGIT:
-      if(state.overwrite){
-        return{
+      if (state.overwrite) {
+        return {
           ...state,
-          overwrite:false,
-          currentOperand:null,
+          overwrite: false,
+          currentOperand: null,
         }
       }
-      if(state.currentOperand == null)return state
-      if(state.currentOperand.length===1){
-        return{...state, currentOperand:null}
+      if (state.currentOperand == null) return state
+      if (state.currentOperand.length === 1) {
+        return { ...state, currentOperand: null }
       }
-      return{
+      return {
         ...state,
-        currentOperand:state.currentOperand.slice(0,-1)
+        currentOperand: state.currentOperand.slice(0, -1)
       }
 
     case ACTIONS.EVALUATE:
@@ -101,13 +101,13 @@ function evaluate({ currentOperand, previousOperand, operation }) {
   }
   return computation.toString()
 }
-const INTEGER_FORMATTER= new Intl.NumberFormat("en-us",{maximumFractionDigits:0})
+const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", { maximumFractionDigits: 0 })
 
-function formatOperand(operand){
-  if(operand == null ) return
-  const [integer,decimal] = operand.split(".")
-  if(decimal==null) return  INTEGER_FORMATTER.format(integer)
-  return `${ INTEGER_FORMATTER.format(integer)}.${decimal}`
+function formatOperand(operand) {
+  if (operand == null) return
+  const [integer, decimal] = operand.split(".")
+  if (decimal == null) return INTEGER_FORMATTER.format(integer)
+  return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
 }
 
 function App() {
